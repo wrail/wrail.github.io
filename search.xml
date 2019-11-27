@@ -3,18 +3,13 @@
   <entry>
     <title>面试题1</title>
     <url>/2019/11/27/%E9%9D%A2%E8%AF%95%E9%A2%981/</url>
-    <content><![CDATA[<ol>
-<li><p>final finally finilize的区别</p>
-<p><a href="[https://github.com/wrail/BaseJava/blob/master/Java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89.md](https://github.com/wrail/BaseJava/blob/master/Java核心基础（一）.md)">链接</a></p>
+    <content><![CDATA[<h3 id="final-finally-finilize的区别"><a href="#final-finally-finilize的区别" class="headerlink" title="final finally finilize的区别"></a>final finally finilize的区别</h3><p><a href="[https://github.com/wrail/BaseJava/blob/master/Java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89.md](https://github.com/wrail/BaseJava/blob/master/Java核心基础（一）.md)">链接</a></p>
 <ul>
 <li>final可以修饰变量，方法和类。它修饰的变量不能被改变，修饰的方法不能被重写，修饰的类不能被继承。</li>
 <li>finally是一种保证代码一定被执行的机制，可以使用finally来关闭资源等</li>
 <li>finalize是Object类的一个方法，与垃圾回收相关，在新版本JDK中已经不建议使用了，有替代的方法java.lang.ref.Cleaner</li>
 </ul>
-</li>
-<li><p>jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法</p>
-<p><strong>JVM内存结构</strong>：</p>
-<p>JVM=类加载器（class loader）+执行引擎（execution engine）+运行时数据区（runtime data area）</p>
+<h3 id="jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法"><a href="#jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法" class="headerlink" title="jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法"></a>jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法</h3><h4 id="JVM内存结构："><a href="#JVM内存结构：" class="headerlink" title="JVM内存结构："></a>JVM内存结构：</h4><p>JVM=类加载器（class loader）+执行引擎（execution engine）+运行时数据区（runtime data area）</p>
 <p>运行时数据区可以分为：方法区，堆，本地方法栈，虚拟机栈，程序计数器，前两个是线程公有的，后三个是线程私有的。</p>
 <ul>
 <li>方法区里一般放的都是常量（常量池中）</li>
@@ -23,8 +18,7 @@
 <li>虚拟机栈是Java程序执行的重要场所，每一个方法在执行的时候都会创建一个栈帧被压进来，一个方法的调用到结束就对应的是它的进栈和出栈。栈帧里面主要有局部变量表，操作数栈，方法出口，动态链接等</li>
 <li>程序计数器可以看作是字节码执行过程中的行号指示器，和微机原理里面的pc作用是相似的</li>
 </ul>
-<p><strong>类加载机制和双亲委派：</strong></p>
-<p><a href="[https://github.com/wrail/JVM/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89.md](https://github.com/wrail/JVM/blob/master/深入理解JVM学习笔记（四）.md)">类加载</a></p>
+<h4 id="类加载机制和双亲委派："><a href="#类加载机制和双亲委派：" class="headerlink" title="类加载机制和双亲委派："></a>类加载机制和双亲委派：</h4><p><a href="[https://github.com/wrail/JVM/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89.md](https://github.com/wrail/JVM/blob/master/深入理解JVM学习笔记（四）.md)">类加载</a></p>
 <p>类的生命周期：加载，链接（验证(主要包括文件格式验证，元数据验证，字节码验证，符号引用验证)，准备，解析），初始化（有且只有<strong>首次次主动使用</strong>的时候才会初始化），使用，卸载。</p>
 <p><a href="https://blog.csdn.net/javazejian/article/details/73413292" target="_blank" rel="noopener">类加载器和双亲委派机制</a></p>
 <p>类加载器分为</p>
@@ -43,8 +37,7 @@
 </ul>
 <p>双亲委派的基本过程：一个类加载器收到加载请求，首先会将这个请求委派给父类加载器，每层都是如此，当父类加载器反馈无法加载，子加载器才会尝试去加载。</p>
 <p>双亲委派的好处：Java类随它的加载器而具有了优先级层次关系，避免了类加载引起应用程序的混乱。（比如我们自己写一个rt.jar中的重名的类，它永远不会被加载）</p>
-<p><strong>垃圾回收算法</strong></p>
-<ul>
+<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><ul>
 <li><p>标记清除</p>
 <ul>
 <li>标记阶段：标记从根结点开始的所有可达对象</li>
@@ -76,24 +69,9 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>集合框架，hashmap源码,扩容机制</p>
-</li>
-<li><p>三次握手，四次挥手，两次握手是否可以建立连接</p>
-</li>
-<li><p>MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引</p>
-</li>
-<li><p>Redis 基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略</p>
-</li>
-<li><p>设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂</p>
-</li>
-<li><p>springcloud相关，hystrix实现原理</p>
-</li>
-<li><p>如何实现限流，漏桶算法</p>
-</li>
-<li><p>多线程，线程池的主要参数，线程池的种类</p>
-</li>
-</ol>
+<h3 id="集合框架，hashmap源码-扩容机制"><a href="#集合框架，hashmap源码-扩容机制" class="headerlink" title="集合框架，hashmap源码,扩容机制"></a>集合框架，hashmap源码,扩容机制</h3><h3 id="三次握手，四次挥手，两次握手是否可以建立连接"><a href="#三次握手，四次挥手，两次握手是否可以建立连接" class="headerlink" title="三次握手，四次挥手，两次握手是否可以建立连接"></a>三次握手，四次挥手，两次握手是否可以建立连接</h3><h3 id="MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引"><a href="#MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引" class="headerlink" title="MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引"></a>MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引</h3><h3 id="Redis-基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略"><a href="#Redis-基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略" class="headerlink" title="Redis 基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略"></a>Redis 基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略</h3><h3 id="设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂"><a href="#设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂" class="headerlink" title="设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂"></a>设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂</h3><h3 id="springcloud相关，hystrix实现原理"><a href="#springcloud相关，hystrix实现原理" class="headerlink" title="springcloud相关，hystrix实现原理"></a>springcloud相关，hystrix实现原理</h3><h3 id="如何实现限流，漏桶算法"><a href="#如何实现限流，漏桶算法" class="headerlink" title="如何实现限流，漏桶算法"></a>如何实现限流，漏桶算法</h3><h3 id="多线程，线程池的主要参数，线程池的种类"><a href="#多线程，线程池的主要参数，线程池的种类" class="headerlink" title="多线程，线程池的主要参数，线程池的种类"></a>多线程，线程池的主要参数，线程池的种类</h3><blockquote>
+<p>这些题都是来源于身边朋友的分享</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>面试集锦</category>
