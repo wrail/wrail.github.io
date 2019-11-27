@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-26T11:08:09.256Z</updated>
+  <updated>2019-11-27T14:11:56.919Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,77 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>测试标签</title>
-    <link href="http://yoursite.com/2019/11/26/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/"/>
-    <id>http://yoursite.com/2019/11/26/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/</id>
-    <published>2019-11-26T11:07:25.000Z</published>
-    <updated>2019-11-26T11:08:09.256Z</updated>
+    <title>面试题1</title>
+    <link href="http://yoursite.com/2019/11/27/%E9%9D%A2%E8%AF%95%E9%A2%981/"/>
+    <id>http://yoursite.com/2019/11/27/%E9%9D%A2%E8%AF%95%E9%A2%981/</id>
+    <published>2019-11-27T01:33:00.000Z</published>
+    <updated>2019-11-27T14:11:56.919Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li><p>final finally finilize的区别</p><p><a href="[https://github.com/wrail/BaseJava/blob/master/Java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89.md](https://github.com/wrail/BaseJava/blob/master/Java核心基础（一）.md)">链接</a></p><ul><li>final可以修饰变量，方法和类。它修饰的变量不能被改变，修饰的方法不能被重写，修饰的类不能被继承。</li><li>finally是一种保证代码一定被执行的机制，可以使用finally来关闭资源等</li><li>finalize是Object类的一个方法，与垃圾回收相关，在新版本JDK中已经不建议使用了，有替代的方法java.lang.ref.Cleaner</li></ul></li><li><p>jvm内存结构，类加载机制，双亲委派模型，垃圾回收算法</p><p><strong>JVM内存结构</strong>：</p><p>JVM=类加载器（class loader）+执行引擎（execution engine）+运行时数据区（runtime data area）</p><p>运行时数据区可以分为：方法区，堆，本地方法栈，虚拟机栈，程序计数器，前两个是线程公有的，后三个是线程私有的。</p><ul><li>方法区里一般放的都是常量（常量池中）</li><li>堆里面主要放的是对象，数组，因此也是垃圾收集的主要区域</li><li>本地方法栈为Native方法服务，虚拟机栈为字节码服务，发挥的作用和虚拟机栈是很相似的</li><li>虚拟机栈是Java程序执行的重要场所，每一个方法在执行的时候都会创建一个栈帧被压进来，一个方法的调用到结束就对应的是它的进栈和出栈。栈帧里面主要有局部变量表，操作数栈，方法出口，动态链接等</li><li>程序计数器可以看作是字节码执行过程中的行号指示器，和微机原理里面的pc作用是相似的</li></ul><p><strong>类加载机制和双亲委派：</strong></p><p><a href="[https://github.com/wrail/JVM/blob/master/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JVM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89.md](https://github.com/wrail/JVM/blob/master/深入理解JVM学习笔记（四）.md)">类加载</a></p><p>类的生命周期：加载，链接（验证(主要包括文件格式验证，元数据验证，字节码验证，符号引用验证)，准备，解析），初始化（有且只有<strong>首次次主动使用</strong>的时候才会初始化），使用，卸载。</p><p><a href="https://blog.csdn.net/javazejian/article/details/73413292" target="_blank" rel="noopener">类加载器和双亲委派机制</a></p><p>类加载器分为</p><ul><li><p>启动类加载器负责加载<JAVA_HOME>\lib目录的或者是被-Xbootclasspath指定路径中的</p></li><li><p>扩展类加载器用来加载<JAVA_HOME>\lib\ext,或java.ext.dirs系统变量指定的路径中的所有类库</p></li><li><p>应用类加载器一般是程序中默认的加载器（getSystemClassLoader返回值就是它，因此也称为系统类加载器），用来加载用户类路径（classpath）指定的类库。</p></li><li><p>自定义类加载器</p><blockquote><p> 只有启动类加载器是用c++写的，是虚拟机的一部分，其余是Java写的，在虚拟机外部（继承于java.lang.ClassLoader）。</p></blockquote></li></ul><p>双亲委派的基本过程：一个类加载器收到加载请求，首先会将这个请求委派给父类加载器，每层都是如此，当父类加载器反馈无法加载，子加载器才会尝试去加载。</p><p>双亲委派的好处：Java类随它的加载器而具有了优先级层次关系，避免了类加载引起应用程序的混乱。（比如我们自己写一个rt.jar中的重名的类，它永远不会被加载）</p><p><strong>垃圾回收算法</strong></p><ul><li><p>标记清除</p><ul><li>标记阶段：标记从根结点开始的所有可达对象</li><li>清除阶段：清除未被标记的对象</li></ul><p>不足：标记和清除的效率都不高，并且标记清除完会产生大量不连续的内存碎片（影响较大的对象的空间分配）</p></li><li><p>复制算法：使用两块大小绝对相等的空间，每次只使用一块</p><ul><li>每次使用其中一块，当这块内存用完，把存货的对象复制到另一块，然后将当前这块清空</li></ul><p>优点是实现简单，运行高效</p><p>缺点是浪费空间</p><blockquote><p>研究表明98%对象都是朝生夕死的，不需要对内存1：1划分，而是将内存分为新生代Eden（80%）+Survivor1（10%）+Survivor2（10%），如果超过10%的对象存活，就意味着Survivor区空间不够，就需要另外一块Survivor为当前Survivor区做担保，使得这些放不下的对象进入老年代。普通的对象进入老年代的话年龄需要到达15（也就是15次gc中存活下来的）。大对象是直接进入老年区（大对象需要很长的连续地址，直接进入老年区目的是避免对象在Eden和Survivor区来回复制，影响效率）</p></blockquote></li><li><p>标记整理</p><ul><li>标记过程和标记清除的标记是相同的</li><li>整理：让所有存活的对象向一端移动，然后清理掉最后一个存活对象以后的所有内存</li></ul></li><li><p>分代收集</p><ul><li>一般将Java堆分为新生代和老年代</li><li>新生代每次垃圾回收都有大量对象死去，只有少数存活，因此采用复制算法</li><li>老年代的对象存活率高，并且没有额外空间担保，就必须使用标记清除或者是标记整理</li></ul></li></ul></li><li><p>集合框架，hashmap源码,扩容机制</p></li><li><p>三次握手，四次挥手，两次握手是否可以建立连接</p></li><li><p>MySQL索引，b＋树，最左前缀匹配，主从复制，聚簇索引和非聚簇索引</p></li><li><p>Redis 基本数据类型，缓存穿透，缓存雪崩，持久化，淘汰策略</p></li><li><p>设计模式，单例，代理和装饰器的区别，简单工厂和抽象工厂</p></li><li><p>springcloud相关，hystrix实现原理</p></li><li><p>如何实现限流，漏桶算法</p></li><li><p>多线程，线程池的主要参数，线程池的种类</p></li></ol>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;&lt;p&gt;final finally finilize的区别&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;[https://github.com/wrail/BaseJava/blob/master/Java%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%8
+      
+    
     </summary>
     
+    
+      <category term="面试集锦" scheme="http://yoursite.com/categories/%E9%9D%A2%E8%AF%95%E9%9B%86%E9%94%A6/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="测试" scheme="http://yoursite.com/tags/%E6%B5%8B%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>今日做了什么</title>
-    <link href="http://yoursite.com/2019/11/26/%E4%BB%8A%E6%97%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/"/>
-    <id>http://yoursite.com/2019/11/26/%E4%BB%8A%E6%97%A5%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88/</id>
-    <published>2019-11-26T10:26:17.000Z</published>
-    <updated>2019-11-26T10:26:17.168Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>category</title>
-    <link href="http://yoursite.com/2019/11/26/category/"/>
-    <id>http://yoursite.com/2019/11/26/category/</id>
-    <published>2019-11-26T08:40:55.000Z</published>
-    <updated>2019-11-26T11:15:00.663Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="Java基础" scheme="http://yoursite.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/11/26/hello-world/"/>
-    <id>http://yoursite.com/2019/11/26/hello-world/</id>
-    <published>2019-11-26T05:34:41.373Z</published>
-    <updated>2019-11-26T05:34:41.374Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
-    
+      <category term="一面" scheme="http://yoursite.com/tags/%E4%B8%80%E9%9D%A2/"/>
     
   </entry>
   
