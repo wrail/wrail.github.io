@@ -240,7 +240,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-29 23:49:31" itemprop="dateModified" datetime="2019-11-29T23:49:31+08:00">2019-11-29</time>
+                <time title="Modified: 2019-11-30 00:01:30" itemprop="dateModified" datetime="2019-11-30T00:01:30+08:00">2019-11-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +269,7 @@
 <blockquote>
 <p>进入这篇文章之前，我想清楚的说一说怎么去理解<code>HashMap</code>源码。它先是使用的<code>hash</code>算法，那么哈希算法需要注意的那就是怎么<code>hash</code>，怎么减少冲突，怎么避免冲突。然后是<code>Map</code>,<code>Map</code>是存储这些<code>&lt;K,V&gt;结构</code>的<code>Entity</code>，那么<code>HashMap</code>需要注意的就是<code>HashMap</code>的初始化过程，什么时候进行数组（桶）扩容等等</p>
 </blockquote>
-<h2 id="构造和初始化"><a href="#构造和初始化" class="headerlink" title="构造和初始化"></a>构造和初始化</h2><p>要深入了解<code>HashMap</code>就必须先了解它的这几个比较重要属性</p>
+<h1 id="HashMap源码"><a href="#HashMap源码" class="headerlink" title="HashMap源码"></a>HashMap源码</h1><h2 id="构造和初始化"><a href="#构造和初始化" class="headerlink" title="构造和初始化"></a>构造和初始化</h2><p>要深入了解<code>HashMap</code>就必须先了解它的这几个比较重要属性</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//节点，就是Entity</span></span><br><span class="line"><span class="keyword">transient</span> Node&lt;K,V&gt;[] table;</span><br><span class="line"><span class="comment">//同来记录使用过的那些键值对</span></span><br><span class="line"><span class="keyword">transient</span> Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Map中k，v的对数</span></span><br><span class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size;</span><br><span class="line"><span class="comment">//threshold（threshold=capacity*loadFactor）是一个阈值，是触发resize的一个重要条件</span></span><br><span class="line"><span class="keyword">int</span> threshold;</span><br><span class="line"><span class="comment">//负载因子</span></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">float</span> loadFactor;</span><br></pre></td></tr></table></figure>
 
 
@@ -315,6 +315,18 @@
 <blockquote>
 <p> 读到这，我相信HashMap里面比较难理解的代码都基本掌握了！</p>
 </blockquote>
+<h2 id="和HashTable的对比"><a href="#和HashTable的对比" class="headerlink" title="和HashTable的对比"></a>和HashTable的对比</h2><ul>
+<li><p><code>HashTable</code>默认容量是11。而<code>HashMap</code>是16</p>
+</li>
+<li><p><code>HashTable</code>是直接使用key的hashCode(key.hashCode())作为hash值，<code>HashMap</code>内部使用hash(Object key)进行位扰动对key的hashCode进行扰动后作为hash值。</p>
+</li>
+<li><p><code>HashTable</code>取哈希桶下标是直接用模运算%,并且也没有容量必须是2的幂次方要求</p>
+</li>
+<li><p><code>Hashtable</code>是<code>Dictionary</code>的子类同时也实现了Map接口，<code>HashMap</code>是对Map接口的一个实现</p>
+</li>
+<li><p><code>HashTable</code>是线程安全的，且不允许key、value是null,<code>HashMap</code>可以有空的key</p>
+</li>
+</ul>
 
       
     </div>
@@ -586,7 +598,7 @@
 -->
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">本篇博文一共5.4k个字</span>
+  <span class="post-count">本篇博文一共5.6k个字</span>
 </div>
 <div class="powered-by">
 <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
